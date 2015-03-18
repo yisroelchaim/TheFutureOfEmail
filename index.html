@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<script src="js/mail-generator.js"></script>
+		<link href="css/style.css" rel="stylesheet" media="screen">
+    <script>
+      window.onload = function(){
+        // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
+        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+
+        window.addEventListener("resize", setHeight);
+        var contentContainer = document.getElementById("contentContainer");
+        var content = document.getElementById("content");
+        var emailCount = document.getElementById("emailCount");
+        var newMsgBtn = document.getElementById("newMsgBtn");
+        var inboxBtn = document.getElementById("inboxBtn");
+
+        function setHeight(){
+			contentContainer.style.height = "100%";
+			contentContainer.style.height = contentContainer.offsetHeight - 50 + "px";
+			content.style.width = "100%";
+			content.style.width = contentContainer.offsetWidth - 250 + "px";
+        }
+        contentContainer.style.height = "100%";
+		contentContainer.style.height = contentContainer.offsetHeight - 50 + "px";
+
+
+		content.style.width = "100%";
+		content.style.width = contentContainer.offsetWidth - 250 + "px";
+
+		emailCount.innerHTML = "(" + window.geemails.length + ")";
+
+
+
+		newMsgBtn.onclick = function() {
+			var output = "<textarea class='newMsgText'></textarea>";
+			output += "<button id='sendNewMsgBtn'>Send Message</button>";
+			content.innerHTML = output;
+		};
+
+		inboxBtn.onclick = function() {
+			content.innerHTML = "";
+			for(i = 0; i < window.geemails.length; i++) {
+				var output = "<div class='geemailContainer'>";
+				output += "<h1>" + window.geemails[i]["subject"] + "</h1>";
+				output += "<p>" + window.geemails[i]["body"] + "</p>";
+				output += "<p>" + window.geemails[i]["sender"] + "</p>";
+				output += "<p>" + window.geemails[i]["date"] + "</p>";
+				output += "</div>";
+				content.innerHTML += output;
+			}
+		};
+
+
+
+
+		for(i = 0; i < window.geemails.length; i++) {
+			var output = "<div class='geemailContainer'>";
+			output += "<h1>" + window.geemails[i]["subject"] + "</h1>";
+			output += "<p>" + window.geemails[i]["body"] + "</p>";
+			output += "<p>" + window.geemails[i]["sender"] + "</p>";
+			output += "<p>" + window.geemails[i]["date"] + "</p>";
+			output += "</div>";
+			content.innerHTML += output;
+		}
+
+		
+        
+      };
+    </script>
+	</head>
+	<body>
+		<div class="container">
+			<div id="main">
+				<div id="header">
+					<div class="oneThird">
+						<img id="logo" src="img/logo.png">
+					</div>
+					<div class="oneThird">
+						
+					</div>
+					<div class="oneThird">
+						
+					</div>
+				</div>
+				<div id="contentContainer">
+					<div id="navBar">
+						<ul>
+							<li><button id="newMsgBtn">WRITE MESSAGE</button></li>
+							<li><img id="inboxBtn" src="img/idk.png"><div id="emailCount">(0)</div></li>
+						</ul>
+					</div>
+					<div id="content">
+								
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
